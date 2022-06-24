@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/patagonia_test
+    username: root
+    password: cr203232
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  application:
+    name: clientservice
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
