@@ -1,0 +1,19 @@
+Partir del modelo disponible en el repositorio:
+https://github.com/Pedroottaviano/PatagoniaSecondTest
+
+Actualizar el repositorio del examen anterior, incluyendo las siguentes modificaciones:
+
+1 - Generar un nuevo servicio llamado "loan-service" (loan = prestamo), el modelo deberá incluir los campos:
+	int id;
+	double amount;
+	string type;
+	int clientId;
+
+2 - A travez de FeignClient y EurekaServer comunicar los servicios para que a travez de la API de clientes
+podamos asociar prestamos a dichos clientes. El clientId deberá incluirse en el Path de la peticion, mientras
+que los demas campos, viajaran en el cuerpo de la misma.
+
+3 - Establecer las configuraciones tanto de Eureka, como de los servicios, a travez de un servidor de
+configuraciones.
+
+4 - Subir lo desarrollado al mismo repositorio donde se trabajo el primer parcial.
