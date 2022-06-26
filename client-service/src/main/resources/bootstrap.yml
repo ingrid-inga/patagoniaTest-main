@@ -1,8 +1,10 @@
 spring:
   application:
     name: client-service
-server:
-  port: 8005
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
 eureka:
   client:
     fetch-registry: true
