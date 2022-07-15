@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: configserver
+          default-label: Gateway
           uri: https://github.com/ingrid-inga/patagoniaTest-main.git
           search-paths: config-data
 
