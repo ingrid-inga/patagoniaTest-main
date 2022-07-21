@@ -1,8 +1,8 @@
 package com.example.student.controller;
 
 import com.example.student.exceptions.NoEntityException;
-import com.example.student.model.Materia;
 import com.example.student.model.Student;
+import com.example.student.model.Subject;
 import com.example.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RestController
+@RequestMapping("/students")
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -23,10 +25,10 @@ public class StudentController {
         return new ResponseEntity<Student>(studentNew, HttpStatus.CREATED);
     }
 
-    @PostMapping(value ="/createmateria/{studentId}")
-    public ResponseEntity<Materia> createExam(@PathVariable("studentId") Long studentId , @RequestBody Materia materia){
-        materia.setStudentId(studentId);
-        return ResponseEntity.ok().body(studentService.createMateria(materia));
+    @PostMapping(value ="/createsubject/{studentId}")
+    public ResponseEntity<Subject> createSubject(@PathVariable("studentId") Long studentId , @RequestBody Subject subject){
+        subject.setStudentId(studentId);
+        return ResponseEntity.ok().body(studentService.createSubject(subject));
     }
 
     @GetMapping("/list")
@@ -42,19 +44,18 @@ public class StudentController {
             return ResponseEntity.ok(student);
         } catch (NoEntityException e) {
             System.out.println(e.getMessage());
-            //return new ResponseEntity<>("Student No encontrado", HttpStatusCode.valueOf(400));
             return ResponseEntity.badRequest().body( HttpStatus.BAD_REQUEST + "Student No encontrado ");
         }
     }
 
-    @GetMapping("/examsbystudent/{id}")
-    public ResponseEntity<Map<String,Object>> getExams(@PathVariable("id") Long studentId){
-        List<Materia> materias = studentService.getMaterias(studentId);
+    @GetMapping("/subjectsbystudent/{id}")
+    public ResponseEntity<Map<String,Object>> getSubjects(@PathVariable("id") Long studentId){
+        List<Subject> subjects = studentService.getSubjects(studentId);
         Map<String,Object> studentMap = new HashMap<>();
-        if ( materias.isEmpty()){
+        if ( subjects.isEmpty()){
             studentMap.put("El estudiante " + studentId , " No tiene Materias " );
         }
-        studentMap.put("El estudiante " + studentId , materias);
+        studentMap.put("El estudiante " + studentId , subjects);
         return ResponseEntity.ok().body(studentMap);
     }
 
@@ -77,7 +78,6 @@ public class StudentController {
             return ResponseEntity.ok("Student Eliminado");
         } catch (NoEntityException e) {
             System.out.println(e.getMessage());
-            //return new ResponseEntity<>("Student No encontrado", HttpStatusCode.valueOf(400));
             return ResponseEntity.badRequest().body( HttpStatus.BAD_REQUEST + "Student No Eliminado");
         }
     }

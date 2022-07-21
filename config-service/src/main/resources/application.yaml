@@ -1,11 +1,17 @@
 server:
   port: 8081
+  eureka:
+    client:
+      fetch-registry: true
+      register-with-eureka: true
+      service-url:
+        default-zone: http://localhost:8761/eureka
 spring:
   cloud:
     config:
       server:
         git:
-          default-label: Gateway
+          default-label: gateway2
           uri: https://github.com/ingrid-inga/patagoniaTest-main.git
           search-paths: config-data
   application:

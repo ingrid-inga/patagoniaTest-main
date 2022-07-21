@@ -1,8 +1,8 @@
 package com.example.materia.controller;
 
 import com.example.materia.exceptions.NoEntityException;
-import com.example.materia.model.Materia;
-import com.example.materia.service.MateriaService;
+import com.example.materia.model.Subject;
+import com.example.materia.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/materias")
-public class MateriaController {
+@RequestMapping("/subjects")
+public class SubjectController {
     @Autowired
-    private MateriaService materiaService;
+    private SubjectService subjectService;
 
     @PostMapping
-    public ResponseEntity<Materia> createMateria(@RequestBody Materia materia){
-        Materia materiaNew = materiaService.createMateria(materia);
-        return new ResponseEntity<Materia>(materiaNew, HttpStatus.CREATED);
+    public ResponseEntity<Subject> createSubject(@RequestBody Subject subject){
+        Subject subjectNew = subjectService.createSubject(subject);
+        return new ResponseEntity<Subject>(subjectNew, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Materia>> getMaterias(){
-        return ResponseEntity.ok(materiaService.findAll());
+    public ResponseEntity<List<Subject>> getSubjects(){
+        return ResponseEntity.ok(subjectService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getMateriaById(@PathVariable("id") Long id) {
 
         try {
-            Materia materia = materiaService.findById(id);
-            return ResponseEntity.ok(materia);
+            Subject subject = subjectService.findById(id);
+            return ResponseEntity.ok(subject);
         } catch (NoEntityException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body( HttpStatus.BAD_REQUEST + "Materia No encontrada ");
@@ -41,26 +41,26 @@ public class MateriaController {
 
     @GetMapping("/bystudent/{studentid}")
     public ResponseEntity<?> finByStudentId(@PathVariable("studentid") Long studentId){
-        return ResponseEntity.ok().body(materiaService.finByStudentId(studentId));
+        return ResponseEntity.ok().body(subjectService.findByStudentId(studentId));
     }
 
     @PutMapping
-    public ResponseEntity<Materia> updateMateria(@RequestBody Materia materia){
-        Materia materiaNew = new Materia();
+    public ResponseEntity<Subject> updateSubject(@RequestBody Subject subject){
+        Subject subjectNew = new Subject();
         try {
-            materiaNew = materiaService.updateMateria(materia);
-            return ResponseEntity.ok(materiaNew);
+            subjectNew = subjectService.updateSubject(subject);
+            return ResponseEntity.ok(subjectNew);
         } catch (NoEntityException e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.status(400).body(materiaNew);
+            return ResponseEntity.status(400).body(subjectNew);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMateria(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteSubject(@PathVariable("id") Long id){
         try {
-            materiaService.deleteMateria(id);
-            return ResponseEntity.ok("Materia Eliminado");
+            subjectService.deleteSubject(id);
+            return ResponseEntity.ok("Materia Eliminada");
         } catch (NoEntityException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body( HttpStatus.BAD_REQUEST + "Materia No Eliminada");
