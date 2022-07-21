@@ -21,7 +21,7 @@ spring:
           uri: lb://student-service
           predicates:
             - Path=/students/**
-        - id: materia-service
+        - id: subject-service
           uri: lb://subject-service
           predicates:
-            - Path=/subject/**
+            - Path=/subjects/**
