@@ -8,10 +8,10 @@
 		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.gateway</groupId>
-	<artifactId>gateway</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gateway</name>
+	<name>gateway-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
